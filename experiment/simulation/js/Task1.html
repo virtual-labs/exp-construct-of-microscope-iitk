@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnification Objective</title>
+    <!-- Bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Option 1: Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+
+    <style>
+        .main-scroll-div {
+            padding: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 85%;
+            width: 50%;
+            border: 2px solid red;
+            overflow-y: hidden;
+            overflow-x: scroll;
+        }
+
+        .cover {
+            height: 100%;
+            width: 100%;
+            position: relative;
+            object-fit: cover;
+        }
+
+        .scroll-images {
+            width: 100%;
+            white-space: nowrap;
+            /* prevent images from wrapping to a new line */
+            scroll-snap-type: x mandatory;
+            /*one image at one time  */
+        }
+
+        .child {
+            display: inline-block;
+            width: 100%;
+            /* set width of each child element to 1/9th of the container */
+            height: 100%;
+            /* margin-right: px; */
+            /* remove extra space between images caused by inline-block */
+            vertical-align: top;
+            /* align images to the top of the container */
+            scroll-snap-align: center;
+            /*one image at one time  */
+        }
+
+        .child-img {
+            width: 100%;
+            height: 100%;
+            padding: 0px;
+            object-fit: cover;
+        }
+
+        input[name="image"] {
+            display: none;
+        }
+
+        input[name="image"]:focus+label {
+            transition: 0.5s ease-out;
+            border: 2px solid red;
+        }
+
+        input[type="radio"]:checked+label>.child-img {
+            border: 2px solid rgb(27, 48, 182);
+        }
+
+        input[type="radio"]:checked+label {
+            scroll-snap-align: start;
+        }
+
+        .scroll-images::-webkit-scrollbar {
+            display: none;
+        }
+
+        h4 {
+            color: blue;
+        }
+
+        h5 {
+            color: red;
+        }
+
+        h6 {
+            color: rgb(31, 31, 30);
+        }
+
+        span {
+            color: red;
+            padding: 5px;
+        }
+        a{
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container ">
+        <form class="row g-3">
+            <div class="col-md-4">
+
+                <!-- magnification using select   -->
+
+                <span class="magnificationtip"></span>
+                <label for="magnification" class="form-label p-2">What is the magnification required?</label>
+                <select id="magnification" class="form-select">
+                    <option value="">Please select magnification </option>
+                    <option value="100">100X</option>
+                    <option value="200">200X</option>
+                    <option value="500">500X</option>
+                </select>
+            </div>
+
+            <div class="col-md-12">
+                <label for="objectivelense" class="form-label">Eyepiece </label>
+                <input type="radio" checked disabled>10X</input>
+            </div>
+            
+            <div class="col-md-4">
+                <span class="objectivelensetip"></span> <br/>
+                <label class="form-label">Please select correct Objective Lens</label>
+                <div>
+                    <input type="radio" id="lense10" name="objectiveLense" value="10" class="form-check-input">
+                    <label for="lense10" class="form-check-label">10X</label>
+                </div>
+                <div>
+                    <input type="radio" id="lense20" name="objectiveLense" value="20" class="form-check-input">
+                    <label for="lense20" class="form-check-label">20X</label>
+                </div>
+                <div>
+                    <input type="radio" id="lense50" name="objectiveLense" value="50" class="form-check-input">
+                    <label for="lense50" class="form-check-label">50X</label>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <span class="checkcompatbilitytip"></span><br/>
+                <!-- This button only checking lens compatible or not it does not care about image -->
+                <button type="button" id="checkCompatibilityButton" class="btn btn-primary"
+                    onclick="checkCompatibility()">Check Lens compatibility
+                </button>
+            </div>
+            <label for="cover"> Please choose correct focus and click on image to select : </label>
+            <div id="cover">
+                <span class="imagetip"></span>
+                <div id="image-container">
+                    <input type="radio" name="image" id="" class="imageInputTag" value="">
+                    <label for="" class="imageInputLabel">
+                        <img class="current-image" id="" height="290px" src="" alt="">
+                    </label>
+
+                </div>
+                <div class="btns pt-1">
+                    <button id="prev" style="margin-right: 200px;">Focus -</button>
+                    <button id="next" class="mx-5">Focus +</button>
+                </div>
+            </div>
+
+            <div class="col-md-12">
+                <span class="submittip"></span><br/>
+                <button type="button" onclick="completeCompactibilityCheck()" class="btn btn-primary">Submit</button>
+            </div>
+            <div class="col-md-12">
+
+                <button type="button"  class="btn btn-warning"> <a href="activity2.html">Previous</a></button>
+                <button type="button"  class="btn btn-warning"> <a href="Task2.html">TASK 2</a></button>
+            </div>
+    </div>
+    </form>
+    </div>
+
+
+    <!-- Modal  choose  OBJECTIVE -->
+    <div class="modal fade" id="chooseModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel"> ERROR : Object Lens </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please Choose a objective lens</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal">Choose Objective lens</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal  correct MAGNIFICTION AND OBJECTIVE -->
+    <div class="modal fade" id="successModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"> SUCCESS : Lens Compatiable </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>The selected magnification and objective lens are compatiable.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal"> OK </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal  incorrect MAGNIFICTION AND OBJECTIVE -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> ERROR : Lens compatiability </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>The selected magnification and objective lens are not compatiable.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="location.reload()">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal  choose IMAGE -->
+    <div class="modal fade" id="chooseImageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h6 class="modal-title" id="exampleModalLabel"> ERROR : Choose image </h6>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Click on image to select image.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-warning" data-bs-dismiss="modal"> OK </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal  correct IMAGE -->
+    <div class="modal fade" id="correctImageModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="exampleModalLabel"> SUCCESS : Correct image </h4>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Correct image selected.</p>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button type="button" class="btn btn-primary" data-bs-dismiss="modal"> OK </button> -->
+                    <button type="button" class="btn btn-danger" onclick="location.reload()"> OK </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal  incorrect IMAGE -->
+    <div class="modal fade" id="incorrectImageModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel"> ERROR : Incorrect image </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Opps ! incorrect image try again .</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> Try again </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+
+        // this will use in event listner 
+        const magnificationSelect = document.querySelector('#magnification');
+        const objectiveRadios = document.querySelectorAll('input[name="objectiveLense"]');
+        const checkCompatibilityButton = document.querySelector('#checkCompatibilityButton');
+        const selectedMagnification = parseInt(magnificationSelect.value);
+
+        // check lense compatibility though onclick 
+        function checkCompatibility() {
+            const magnificationSelect = document.querySelector('#magnification');
+            const objectiveRadios = document.querySelectorAll('input[name="objectiveLense"]');
+            const selectedMagnification = parseInt(magnificationSelect.value);
+            let selectedObjective;
+
+            objectiveRadios.forEach((radio) => {
+                if (radio.checked) {
+                    selectedObjective = parseInt(radio.value);
+                }
+            });
+            var chooseModal = new bootstrap.Modal(document.getElementById('chooseModal'));
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            if (selectedObjective === undefined) {
+                chooseModal.show();
+            } else {
+                if (selectedMagnification === 100 && selectedObjective === 10) {
+                    successModal.show();
+                    // renderImages(selectedMagnification);
+                    renderImagesAsCarousel(selectedMagnification)
+                } else if (selectedMagnification === 200 && selectedObjective === 20) {
+                    successModal.show();
+                    // renderImages(selectedMagnification);
+                    renderImagesAsCarousel(selectedMagnification)
+                } else if (selectedMagnification === 500 && selectedObjective === 50) {
+                    successModal.show();
+                    // renderImages(selectedMagnification);
+                    renderImagesAsCarousel(selectedMagnification)
+                } else {
+                    errorModal.show();
+                }
+            }
+
+        }
+
+
+        function renderImagesAsCarousel(magnification) {
+
+            // Image URLs
+            const imageUrls = {
+                '100x': [
+                    "task1images/100x/1.jpg",
+                    "task1images/100x/2.jpg",
+                    "task1images/100x/3.jpg",
+                    "task1images/100x/4.jpg",
+                    "task1images/100x/5.jpg",
+                    "task1images/100x/6.jpg",
+                    "task1images/100x/7.jpg",
+                    "task1images/100x/8.jpg",
+                    "task1images/100x/9.jpg",
+                    "task1images/100x/10.jpg",
+                    "task1images/100x/11.jpg",
+                    "task1images/100x/12.jpg",
+                    "task1images/100x/13.jpg",
+                    "task1images/100x/14.jpg",
+                    "task1images/100x/15.jpg",
+                ],
+                '200x': [
+                    "task1images/200x/1.jpg",
+                    "task1images/200x/2.jpg",
+                    "task1images/200x/3.jpg",
+                    "task1images/200x/4.jpg",
+                    "task1images/200x/5.jpg",
+                    "task1images/200x/6.jpg",
+                    "task1images/200x/7.jpg",
+                    "task1images/200x/8.jpg",
+                    "task1images/200x/9.jpg",
+                    "task1images/200x/10.jpg",
+                    "task1images/200x/11.jpg",
+                    "task1images/200x/12.jpg",
+                    "task1images/200x/13.jpg",
+                    "task1images/200x/14.jpg",
+                    "task1images/200x/15.jpg"
+                ],
+                '500x': [
+                    "task1images/500x/1.jpg",
+                    "task1images/500x/2.jpg",
+                    "task1images/500x/3.jpg",
+                    "task1images/500x/4.jpg",
+                    "task1images/500x/5.jpg",
+                    "task1images/500x/6.jpg",
+                    "task1images/500x/7.jpg",
+                    "task1images/500x/8.jpg",
+                    "task1images/500x/9.jpg",
+                    "task1images/500x/10.jpg",
+                    "task1images/500x/11.jpg",
+                    "task1images/500x/12.jpg",
+                    "task1images/500x/13.jpg",
+                    "task1images/500x/14.jpg",
+                    "task1images/500x/15.jpg",
+                ],
+
+            }
+
+
+            const carousel = document.getElementById("carousel");
+            const prevButton = document.getElementById("prev");
+            const nextButton = document.getElementById("next");
+            const imageContainer = document.getElementById("image-container");
+            const currentImage = document.getElementsByClassName("current-image")[0];
+            const imageInput = document.getElementsByClassName('imageInputTag')[0]
+            const imageInputLabel = document.getElementsByClassName('imageInputLabel')[0]
+
+            let currentImageIndex = 0;
+
+            const imageSelector = ImageBundleChooser(magnification);
+
+            // Function to load the next image
+            function loadNextImage() {
+                event.preventDefault()
+                // imageInput.checked=false
+                console.log(currentImageIndex)
+
+                if (currentImageIndex < imageUrls[imageSelector].length - 1) {
+                    imageInput.checked = false
+                    currentImageIndex++;
+                    imageInput.setAttribute('id', 'image' + currentImageIndex)
+                    imageInputLabel.setAttribute('for', 'image' + currentImageIndex)
+                    currentImage.src = imageUrls[imageSelector][currentImageIndex];
+                    correctImage(imageSelector, (imageInput.id).substring(5))
+                    console.log("Correct Image:-" + (imageInput.id).substring(5))
+                }
+            }
+
+            // Event listener for the "next" button
+            nextButton.addEventListener("click", loadNextImage);
+
+            function loadPreviousImage() {
+                event.preventDefault()
+
+                if (currentImageIndex > 0) {
+                    imageInput.checked = false
+                    currentImageIndex--;
+                    imageInput.setAttribute('id', 'image' + currentImageIndex)
+                    imageInputLabel.setAttribute('for', 'image' + currentImageIndex)
+
+                    currentImage.src = imageUrls[imageSelector][currentImageIndex];
+                    correctImage(imageSelector, (imageInput.id).substring(5))
+                    // correctImage(imageSelector, imageInput.id)
+
+                }
+            }
+            // Event listener for the "prev" button
+            prevButton.addEventListener("click", loadPreviousImage);
+
+            // Function to load the initial image
+            function loadInitialImage() {
+                console.log(imageUrls[imageSelector])
+                imageInput.setAttribute('id', 'image' + currentImageIndex)
+                imageInputLabel.setAttribute('for', 'image' + currentImageIndex)
+
+                currentImage.src = imageUrls[imageSelector][currentImageIndex];
+                correctImage(imageSelector, (imageInput.id).substring(5))
+            }
+            // Load the initial image
+            loadInitialImage();
+
+        }
+
+
+
+        function completeCompactibilityCheck() {
+            const magnificationSelect = document.querySelector('#magnification');
+            const objectiveRadios = document.querySelectorAll('input[name="objectiveLense"]');
+            const selectedMagnification = parseInt(magnificationSelect.value);
+            let selectedObjective;
+
+            objectiveRadios.forEach((radio) => {
+                if (radio.checked) {
+                    selectedObjective = parseInt(radio.value);
+                }
+            });
+
+            var chooseModal = new bootstrap.Modal(document.getElementById('chooseModal'));
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+            if (selectedObjective === undefined) {
+                chooseModal.show();
+            } else {
+                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
+                if (selectedMagnification === 100 && selectedObjective === 10) {
+                    successModal.show();
+                    checkingImage();
+                } else if (selectedMagnification === 200 && selectedObjective === 20) {
+                    successModal.show();
+                    checkingImage();
+                } else if (selectedMagnification === 500 && selectedObjective === 50) {
+                    successModal.show();
+                    checkingImage();
+                } else {
+                    errorModal.show();
+                }
+            }
+
+        }
+
+        function checkingImage() {
+            let selectedObjective;
+            objectiveRadios.forEach((radio) => {
+                if (radio.checked) {
+                    selectedObjective = parseInt(radio.value);
+                }
+            });
+
+            var chooseModal = new bootstrap.Modal(document.getElementById('chooseModal'));
+            if (selectedObjective === undefined) {
+                chooseModal.show();
+            } else {
+                let selectedImageRadio;
+                const imageRadios = document.querySelectorAll('input[name="image"]');
+
+                var chooseImageModal = new bootstrap.Modal(document.getElementById('chooseImageModal'));
+                var correctImageModal = new bootstrap.Modal(document.getElementById('correctImageModal'));
+                var incorrectImageModal = new bootstrap.Modal(document.getElementById('incorrectImageModal'));
+
+                imageRadios.forEach((radio) => {
+                    if (radio.checked) {
+                        selectedImageRadio = true;
+                        const selectedObjectiveLens = document.querySelector('input[name="objectiveLense"]:checked').value; // get the selected radio button value
+                        const selectedMagnification = document.getElementById('magnification').value; // get the selected magnification value
+
+                        const selectedImageValue = document.querySelector('input[name="image"]:checked').value;
+                        // get the selected image value
+                        console.log(selectedImageValue)
+
+                        const totalMagnification = selectedMagnification * selectedObjectiveLens; // calculate the total magnification
+                        if (selectedImageValue == totalMagnification) {
+                            // alert(`Selected Image: ${selectedImageValue}\nTotal Magnification: ${totalMagnification}`); // display the selected image and total magnification
+                            correctImageModal.show();
+                        }
+                        else {
+                            // alert(`Selected Image: ${selectedImageValue}\nTotal Magnification: ${totalMagnification}`); // display the selected image and total magnification
+                            incorrectImageModal.show();
+                        }
+                    }
+                });
+                if (selectedImageRadio == undefined) {
+                    chooseImageModal.show();
+                }
+            }
+        }
+
+        function ImageBundleChooser(magnification) {
+            if (magnification == 100) {
+                return '100x';
+            }
+            if (magnification == 200) {
+                return '200x'
+            }
+            if (magnification == 500) {
+                return '500x'
+            }
+
+        }
+
+        function correctImage(magnification, imageId) {
+            console.log("from fn:-" + imageId)
+            console.log("from fn:-" + magnification)
+            magnification = magnification.substring(0, 3)
+            const imageInput = document.getElementsByClassName('imageInputTag')[0]
+            if (magnification == 100 && (imageId == 7 || imageId == 8)) {
+                console.log("from 100x:-" + imageId)
+                imageInput.setAttribute('value', '1000')
+                return '100x';
+            }
+            if (magnification == 200 && (imageId == 10 || imageId == 11)) {
+                imageInput.setAttribute('value', '4000')
+                return '200x'
+            }
+            if (magnification == 500 && imageId == 6) {
+                imageInput.setAttribute('value', '25000')
+                return '500x'
+            }
+            else {
+                imageInput.setAttribute('value', '')
+
+            }
+        }
+        console.log(ImageBundleChooser(100))
+
+
+        // Mini instruction 
+        let steps = [
+            {
+                body: "Step 1: Choose the magnification that you need.",
+                selector: ".magnificationtip",
+            },
+            {
+                body: "Step 2: Based on the given eyepiece, choose the correct objective lens.",
+                selector: ".objectivelensetip",
+            },
+            {
+                body: "Step 3: Check Lens Compatibility button to check for the right lens.",
+                selector: ".checkcompatbilitytip",
+            },
+            {
+                body: "Step 4: Choose the correct image by clicking on the image after adjusting the focus using the Focus - and Focus + buttons.",
+                selector: ".imagetip",
+            },
+            {
+                body: "Step 5: Submit to check if your answer is correct.",
+                selector: ".submittip",
+            },
+        ];
+
+        function showTooltip(step) {
+            console.log("Showing tooltip:", step.body);
+            const selector = step.selector;
+            const tooltipText = step.body;
+
+            const targetElement = document.querySelector(selector);
+            targetElement.innerHTML = tooltipText;
+        }
+
+        function hideTooltip(selector) {
+            const targetElement = document.querySelector(selector);
+            targetElement.innerHTML = "";
+        }
+        function performStep(i) {
+            if (i >= steps.length) {
+                console.log("Instruction Completed");
+                return;
+            }
+            const step = steps[i];
+            showTooltip(step);
+
+            setTimeout(function () {
+                console.log("Moving to next step");
+                hideTooltip(step.selector);
+                performStep(i + 1);
+            }, 3000);
+        }
+        console.log("Starting instruction");
+        performStep(0);
+
+
+
+
+    </script>
+
+</body>
+
+</html>
