@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Magnification Image</title>
+    <!-- Bootstrap css -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <!-- Option 1: Bootstrap JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+        crossorigin="anonymous"></script>
+    <!-- Font -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        .main-container {
+            width: 100%;
+            margin: 0 auto;
+            padding: 10px;
+        }
+
+        .child {
+            width: 100%;
+            height: auto;
+        }
+
+        .child-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .navigation-buttons {
+            margin-top: 20px;
+        }
+
+        .navigation-buttons button {
+            margin-right: 10px;
+        }
+
+        #locationText {
+            margin-top: 5px;
+        }
+
+        input[name="image"] {
+            display: none;
+        }
+
+        h5 {
+            color: red;
+        }
+
+        span {
+            color: red;
+            padding: 5px;
+        }
+
+        /* joystick button */
+        #joystickContainer {
+            /* position: fixed; */
+            /* bottom: 20px; */
+            /* right: 20px; */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        #joystickContainer>div {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+        }
+
+        .navigation-button {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgb(224, 221, 221);
+            color: red;
+            font-size: 20px;
+            border: none;
+            outline: none;
+        }
+
+        .navigation-button:active {
+            background-color: lightgray;
+        }
+
+        a {
+            text-decoration: none;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div class="container main-container">
+        <form class="row g-3">
+            <div class="col-md-4 ">
+                <!-- magnification using select   -->
+                <span id="magnificationtip"></span>
+                <label for="magnification" class="form-label m-2">Select magnification for images </label>
+                <select id="magnification" class="form-select">
+                    <option value="">Please select magnification</option>
+                    <option value="100">100X</option>
+                    <option value="200">200X</option>
+                    <option value="500">500X</option>
+                </select>
+            </div>
+
+            <div class="row ">
+                <p id="locationText">
+                    <span id="locationTexttip"></span><br />
+                    Your image selection will be shown here ..
+                </p>
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div id="imageContainer"></div>
+
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="navigation-buttons">
+                        <span class="navigation-buttonstip "></span>
+                        <p>Use buttons to navigate images </p>
+                        <div id="joystickContainer">
+                            <button id="navUp" class="navigation-button"><i class="fa fa-arrow-up "> </i></button>
+                            <div>
+                                <button id="navLeft" class="navigation-button mx-3"><i class="fa fa-arrow-left ">
+                                    </i></button>
+                                <button id="navRight" class="navigation-button mx-3"><i class="fa fa-arrow-right ">
+                                    </i></button>
+                            </div>
+                            <button id="navDown" class="navigation-button"><i class="fa fa-arrow-down "> </i></button>
+                        </div>
+                    </div>
+
+                </div>
+
+
+
+        </form>
+        <div class="col-md-12">
+
+            <button type="button" class="btn btn-warning m-2"> <a href="Task1.html">Previous</a></button>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal fade" id="modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel"> ERROR : Magnification </h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Please select magnification, without image you can not use navigation buttons</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-bs-dismiss="modal"> OK </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Variables for image navigation
+            let selectedMagnification = 0;
+            let selectedImageNumber = 1;
+            let selectedRow = 0;
+            let selectedColumn = 0;
+            const numImages = 100;
+            const numColumns = 10;
+
+            // Get necessary elements
+            const magnificationSelect = document.querySelector('#magnification');
+            const imageContainer = document.getElementById('imageContainer');
+            const locationText = document.getElementById('locationText');
+            const navLeft = document.getElementById('navLeft');
+            const navUp = document.getElementById('navUp');
+            const navDown = document.getElementById('navDown');
+            const navRight = document.getElementById('navRight');
+            const modal = new bootstrap.Modal(document.getElementById('modal'));
+
+            // Function to calculate and display the image location
+            function getImageLocation(imageNumber) {
+                const row = Math.floor((imageNumber - 1) / numColumns) + 1;
+                const column = (imageNumber - 1) % numColumns + 1;
+                return `(${row},${column})`;
+            }
+
+            // Function to display the selected image
+            function displaySelectedImage() {
+                imageContainer.innerHTML = '';
+
+                const newImage = document.createElement('img');
+                newImage.className = 'child-img';
+
+                let imagePath = '';
+                if (selectedMagnification === 100) {
+                    imagePath = `task2images/100x/${selectedImageNumber}.jpg`;
+                } else if (selectedMagnification === 200) {
+                    imagePath = `task2images/200x/${selectedImageNumber}.jpg`;
+                } else if (selectedMagnification === 500) {
+                    imagePath = `task2images/500x/${selectedImageNumber}.jpg`;
+                }
+
+                newImage.src = imagePath;
+                imageContainer.appendChild(newImage);
+
+                // Update the location text
+                locationText.textContent = `Your image selection: ${getImageLocation(selectedImageNumber)}`;
+            }
+
+
+            // Function to handle image navigation
+            function navigateImage(direction) {
+                if (selectedMagnification === 0) {
+                    modal.show();
+                    return;
+                }
+
+                const currentColumn = (selectedImageNumber - 1) % numColumns + 1;
+
+                switch (direction) {
+                    case 'left':
+                        if (currentColumn > 1) {
+                            selectedImageNumber--;
+                            displaySelectedImage();
+                        }
+                        break;
+                    case 'up':
+                        if (selectedImageNumber > numColumns) {
+                            selectedImageNumber -= numColumns;
+                            displaySelectedImage();
+                        }
+                        break;
+                    case 'down':
+                        if (selectedImageNumber <= numImages - numColumns) {
+                            selectedImageNumber += numColumns;
+                            displaySelectedImage();
+                        }
+                        break;
+                    case 'right':
+                        if (currentColumn < numColumns) {
+                            selectedImageNumber++;
+                            displaySelectedImage();
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+
+
+            // Event listener for magnification select
+            magnificationSelect.addEventListener('change', function (event) {
+                selectedMagnification = parseInt(event.target.value);
+                selectedImageNumber = 1;
+                displaySelectedImage();
+            });
+
+            // Event listeners for image navigation buttons
+            navLeft.addEventListener('click', function (event) {
+                event.preventDefault();
+                navigateImage('left');
+            });
+
+            navUp.addEventListener('click', function (event) {
+                event.preventDefault();
+                navigateImage('up');
+            });
+
+            navDown.addEventListener('click', function (event) {
+                event.preventDefault();
+                navigateImage('down');
+            });
+
+            navRight.addEventListener('click', function (event) {
+                event.preventDefault();
+                navigateImage('right');
+            });
+
+            // Mini instruction 
+            let steps = [
+                {
+                    body: "Step 1: Select a magnification for images",
+                    selector: "#magnificationtip",
+                },
+                {
+                    body: "Step 2: Use the navigation buttons to navigate images",
+                    selector: ".navigation-buttonstip",
+                },
+                {
+                    body: "Step 3: See your image location",
+                    selector: "#locationTexttip",
+                },
+            ];
+
+            function showTooltip(step) {
+                console.log("Showing tooltip:", step.body);
+                const selector = step.selector;
+                const tooltipText = step.body;
+
+                const targetElement = document.querySelector(selector);
+                targetElement.innerHTML = tooltipText;
+            }
+
+            function hideTooltip(selector) {
+                const targetElement = document.querySelector(selector);
+                targetElement.innerHTML = "";
+            }
+            function performStep(i) {
+                if (i >= steps.length) {
+                    console.log("Instruction Completed");
+                    return;
+                }
+                const step = steps[i];
+                showTooltip(step);
+
+                setTimeout(function () {
+                    console.log("Moving to next step");
+                    hideTooltip(step.selector);
+                    performStep(i + 1);
+                }, 3000);
+            }
+            console.log("Starting instruction");
+            performStep(0);
+
+
+        });
+
+
+
+
+    </script>
+
+</body>
+
+</html>
