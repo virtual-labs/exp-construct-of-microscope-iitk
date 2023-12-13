@@ -16,6 +16,9 @@
     <!-- Font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
+        *{
+            font-size: 20px;
+        }
         .main-container {
             width: 100%;
             margin: 0 auto;
@@ -36,6 +39,7 @@
         .navigation-buttons {
             margin-top: 20px;
         }
+
 
         .navigation-buttons button {
             margin-right: 10px;
@@ -92,13 +96,31 @@
         a {
             text-decoration: none;
         }
+
+        .image-matrix {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0px;
+            padding: 25px;
+        }
+
+        .image-matrix img {
+            width: 53px;
+            height: 50px;
+            object-fit: cover;
+        }
+
+        .image-matrix .selected {
+            border: 3px solid red;
+
+        }
     </style>
 
 </head>
 
 <body>
     <div class="container main-container">
-        <form class="row g-3">
+        <form class="row g-1">
             <div class="col-md-4 ">
                 <!-- magnification using select   -->
                 <span id="magnificationtip"></span>
@@ -112,17 +134,27 @@
             </div>
 
             <div class="row ">
-                <p id="locationText">
-                    <span id="locationTexttip"></span><br />
+                <p id="locationText"><span id="locationTexttip"></span><br />
                     Your image selection will be shown here ..
                 </p>
                 <div class="col-md-6 d-flex justify-content-center align-items-center">
+                  
                     <div id="imageContainer"></div>
 
                 </div>
 
                 <div class="col-md-6">
+                    
+                    <!-- Image matrix -->
+                    <div id="locationText">
+                        <span id="imageMaptip"></span>
+                        <p>Image Navigation Map </p>
+                        <div id="imageMatrix" class="image-matrix"></div>
+                    </div>
 
+                </div>
+                <div class="col-md-4">
+                    <!-- Navigation button -->
                     <div class="navigation-buttons">
                         <span class="navigation-buttonstip "></span>
                         <p>Use buttons to navigate images </p>
@@ -137,9 +169,7 @@
                             <button id="navDown" class="navigation-button"><i class="fa fa-arrow-down "> </i></button>
                         </div>
                     </div>
-
                 </div>
-
 
 
         </form>
@@ -219,7 +249,6 @@
                 locationText.textContent = `Your image selection: ${getImageLocation(selectedImageNumber)}`;
             }
 
-
             // Function to handle image navigation
             function navigateImage(direction) {
                 if (selectedMagnification === 0) {
@@ -259,33 +288,83 @@
                 }
             }
 
+            // Function to create the image matrix
+            function createImageMatrix() {
+                const imageMatrix = document.getElementById('imageMatrix');
+                imageMatrix.innerHTML = '';
+
+                for (let i = 1; i <= numImages; i++) {
+                    const image = document.createElement('img');
+                    image.src = `task2images/${selectedMagnification}x/${i}.jpg`;
+                    image.alt = `Loading ${i}`;
+                    image.addEventListener('click', function () {
+                        selectedImageNumber = i;
+                        displaySelectedImage();
+                        highlightSelectedImage();
+                    });
+
+                    imageMatrix.appendChild(image);
+                }
+            }
+
+            // Function to highlight the selected image in the image matrix
+            function highlightSelectedImage() {
+                const images = document.querySelectorAll('#imageMatrix img');
+                images.forEach((img) => {
+                    img.classList.remove('selected');
+                });
+
+                const selectedImage = document.querySelector(`#imageMatrix img:nth-child(${selectedImageNumber})`);
+                selectedImage.classList.add('selected');
+            }
+
+            // Update the image matrix and highlight the selected image on magnification or image change
+            function updateImageMatrix() {
+                createImageMatrix();
+                highlightSelectedImage();
+            }
 
             // Event listener for magnification select
             magnificationSelect.addEventListener('change', function (event) {
                 selectedMagnification = parseInt(event.target.value);
                 selectedImageNumber = 1;
-                displaySelectedImage();
+
+                if (selectedMagnification !== 0) {
+                    updateImageMatrix();
+                    displaySelectedImage();
+                    highlightSelectedImage();
+                    modal.hide();
+                } else {
+                    // Show the modal if no magnification is selected
+                    modal.show();
+                    imageMatrix.innerHTML = '';
+                    locationText.textContent = 'Your image will be visible after selecting magnification.';
+                }
             });
 
             // Event listeners for image navigation buttons
             navLeft.addEventListener('click', function (event) {
                 event.preventDefault();
                 navigateImage('left');
+                highlightSelectedImage();
             });
 
             navUp.addEventListener('click', function (event) {
                 event.preventDefault();
                 navigateImage('up');
+                highlightSelectedImage();
             });
 
             navDown.addEventListener('click', function (event) {
                 event.preventDefault();
                 navigateImage('down');
+                highlightSelectedImage();
             });
 
             navRight.addEventListener('click', function (event) {
                 event.preventDefault();
                 navigateImage('right');
+                highlightSelectedImage();
             });
 
             // Mini instruction 
@@ -295,11 +374,15 @@
                     selector: "#magnificationtip",
                 },
                 {
-                    body: "Step 2: Use the navigation buttons to navigate images",
+                    body: "Step 2: After magnification selection images map will be here",
+                    selector: "#imageMaptip",
+                },
+                {
+                    body: "Step 3: Use the navigation buttons to navigate images",
                     selector: ".navigation-buttonstip",
                 },
                 {
-                    body: "Step 3: See your image location",
+                    body: "Step 4: See your image location",
                     selector: "#locationTexttip",
                 },
             ];
@@ -317,6 +400,7 @@
                 const targetElement = document.querySelector(selector);
                 targetElement.innerHTML = "";
             }
+
             function performStep(i) {
                 if (i >= steps.length) {
                     console.log("Instruction Completed");
@@ -331,14 +415,13 @@
                     performStep(i + 1);
                 }, 3000);
             }
+
             console.log("Starting instruction");
             performStep(0);
 
-
+            // Call the function to initially create the image matrix and highlight the selected image
+            updateImageMatrix();
         });
-
-
-
 
     </script>
 
