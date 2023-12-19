@@ -1,14 +1,12 @@
-1.	Place the microscope on a flat surface.<br>
-2.	Plug in the power cord and turn on the light from the illuminator.<br>
-3.	Place the specimen onto the stage of the microscope.  If the specimen is a glass slide, then fasten it with the stage clips. <br>
-4.	Move the revolving nosepiece or turret to position an objective lens with the lowest magnifying power (usually 4x or 10x) over the specimen.<br>
-5.	Look through the eyepiece and position the objective lens using the coarse and fine adjustment knobs to bring the specimen into focus.  Do not let the objective lens touch the specimen/glass slide at any time.<br>
-6.	Adjust the condenser lens and diaphragm to control the light entering the microscope.<br>
-7.	Using the diopter adjustment ring, try to focus the specimen using each eyepiece lens.<br>
-8.	Move the slide/sample around to examine the place of interest using the mechanical knobs.<br>
-9.	Using the fine focus adjustment knob, position the objective lens to focus the specimen.<br>
-10.	Readjust the condenser and diaphragm for a clear image.<br>
-11.	Record the image through a camera.<br>
-12.	Once the specimen has been examined at the lowest magnification, enhance the magnification by revolving the nosepiece and selecting a high-magnifying power objective lens<br>
-13.	Readjust the position of the objective lens into focus and readjust the condenser lens and diaphragm.<br>
-14.	After imaging, lower the stage, put the objective lens of the lowest magnifying power into position, remove the specimen and turn off the illuminator
+•	<b>Sectioning of sample</b>- Select a representative sample that accurately depicts the material's unique microstructural characteristics. Based on the needs of the analysis, take the sample's dimensions and form into consideration.<br>
+•	<b>Sectioning</b>- Section the sample using a precision cutting machine. The sections ought to be divided perpendicularly to the interest areas. Use a coolant or lubricant when cutting to avoid overheating and sample damage.<br>
+•	<b>Mounting</b>- Insert the divided sample into a mounting substance (often a thermosetting resin) to sustain and uphold the specimen's integrity in the ensuing stages. Make sure you're oriented correctly to get the analysis plane you want.<br>
+•	<b>Grinding</b>- Using abrasive papers or grinding stones, coarsely grind the mounted sample to get rid of extra material and create a smooth, even surface. To improve the surface finish, go to finer abrasive sheets.<br>
+•	<b>Polishing</b>- To achieve a mirror-like surface, polish the sample with polishing papers of varying grit sizes to eliminate scratches and grinding marks. For the last stages of polishing, use a polishing cloth dipped in a polishing suspension (usually alumina or colloidal silica).<br>
+•	<b>Etching<b>- An essential first step in exposing the material's microstructure is etching. Choose the right etchant according to the content being examined. Chemical solutions such as picral and nital are frequently used as etchants. To ensure even and regulated etching, apply the etchant for a predetermined amount of time.<br> 
+•	<b>Rinsing and drying</b>- To get rid of any last bits of debris or etchant, thoroughly rinse the polished and etched sample with water or an appropriate solvent. Use a gentle, lint-free cloth or a stream of air to dry the specimen.<br>
+•	<b>Mount removal</b>- If required, use a heated mount remover or an appropriate solvent to remove the mounting material.<br>
+•	<b>Final cleaning</b>- Use a mild detergent or solvent to clean the sample and get rid of any leftover contaminants. Before examining the specimen under a microscope, make sure it is completely dry.<br>
+•	<b>Microscopic examination</b>- The prepared specimen should be placed on the microscope stage. For a thorough examination of the microstructure, use the proper magnification and lighting. Take pictures or draw sketches for your documentation.<br>
+•	<b>Analysis and reporting</b>- Conduct any required measurements or analyses in accordance with the study's goals. Note down all the results, including phases, microstructural characteristics, and any anomalies.<br>
+•	<b>Preservation (optional)</b>- If the specimen needs to be preserved for an extended period, think about applying a protective layer (like lacquer) to stop oxidation.
