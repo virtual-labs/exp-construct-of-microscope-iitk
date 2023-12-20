@@ -1,0 +1,95 @@
+.microscope{
+    float:left;
+    position: relative;
+    width: 525px;
+    height: 525px;
+    background-color: #4c4e53;
+    border-radius: 20px;
+    margin: 4px;
+}
+
+.base{
+    position: absolute;
+width: 241px;
+top: 422px;
+left: 82px;
+}
+
+.arm{
+    position: absolute;
+width: 120px;
+top: 204px;
+left: 103px;
+}
+
+.base-stand{
+    position: absolute;
+width: 59px;
+top: 392px;
+left: 127px;
+}
+
+.body-tube{
+    position: absolute;
+    width: 41px;
+    top: 192px;
+    left: 205px;
+}
+.eye-piece{
+    position: absolute;
+width: 42px;
+top: 124px;
+left: 204.8px;
+}
+.revolving-nose-piece{
+    position: absolute;
+width: 59px;
+top: 297px;
+left: 206.8px;
+}
+
+.coarse-adjustment-knob{
+    position: absolute;
+width: 33px;
+top: 221px;
+left: 169px;
+}
+.fine-adjustment-knob{
+    position: absolute;
+width: 19px;
+top: 260px;
+left: 153px;
+}
+.inclination-joint{
+    position: absolute;
+width: 22px;
+top: 396px;
+left: 160px;
+}
+.condenser{
+    position: absolute;
+width: 52px;
+top: 366px;
+left: 197px;
+}
+
+.stage-and-clips{
+    position: absolute;
+width: 115px;
+top: 345px;
+left: 168px;
+}
+.mirror{
+    position: absolute;
+    width: 52px;
+    top: 422px;
+    left: 197px;
+}
+
+.arm:hover,.base:hover,.base-stand:hover,.body-tube:hover,.coarse-adjustment-knob:hover,.condenser:hover,.eye-piece:hover,.fine-adjustment-knob:hover,.inclination-joint:hover,.mirror:hover,.revolving-nose-piece:hover,.stage-and-clips:hover {
+    cursor: pointer;
+    filter: drop-shadow(0px 0px 5px yellowgreen);
+    transform: scale(1.1);
+  }
+
+

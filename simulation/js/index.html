@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Optical Microscope</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/body.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sevillana&family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+    <script src="javascript/popover.js"></script>
+</head>
+<body>
+    <header><h1>THE TOUR OF OPTICAL MICROSCOPE</h1></header>
+    <div class="full-page">
+
+        
+    <div class="microscope">
+        <img class="base" src="images/base.png" alt="">
+        <img class="arm" src="images/arm.png" alt="">
+        <img class="base-stand" src="images/base-stand.png" alt="">
+        <img class="revolving-nose-piece" src="images/revolving-nose-piece.png" alt="">
+        <img class="body-tube" src="images/body-tube.png" alt="">
+        <img class="eye-piece" src="images/eye-piece.png" alt="">
+        <img class="coarse-adjustment-knob" src="images/coarse-adjustment-knob.png" alt="">
+        <img class="fine-adjustment-knob" src="images/fine-adjustment-knob.png" alt="">
+        <img class="inclination-joint" src="images/inclination-joint.png" alt="">
+        <img class="mirror" src="images/mirror.png" alt="">
+        <img class="condenser" src="images/condenser.png" alt="">
+        <img class="stage-and-clips" src="images/stage-and-clips.png" alt="">
+    </div>
+    <div class="intro">
+        <h2>Introduction</h2><br><hr>
+    <ul>
+        <li>An optical microscope, commonly referred to as a light microscope.</li><br>
+        <li>It uses one or more lenses to magnify visible light images of tiny materials.</li><br>
+        <li>The lenses are positioned between the sample and the viewer's eye to enlarge the image and enable closer examination.</li><br>
+        <li>
+            There are two types of Optical Microscope:
+            <ol>
+                <li><small> Simple Microscope</small></li>
+                <li><small> Compound Microscope</small></li>
+            </ol>
+        </li>
+    </ul>
+</div>
+</div>
+<div class="nextdiv">
+    <a href="activity2.html" class="next">Next &raquo;</a>
+</div>
+<script>
+    let popover = new Popover();
+
+    let steps = [
+      {
+        body: "1. Eyepiece: An eyepiece is the upperpart of microscope that magnifies the primary image produced by objective.",
+        position: { top: "175px", left: "250px" },
+      },
+      {
+        body: "2. Bodytube: The body tube that connects the eyepiece to the objective lens.",
+        position: { top: "280px", left: "250px" },
+      },
+      {
+        body: "3. Revolving nosepiece: The revolving nosepiece or turret that holds one or more objective lenses of different magnification power.",
+        position: { top: "350px", left: "270px" },
+      },
+      {
+        body: "4. Stage & clips: The flat platform where the slide is placed and clips hold it.",
+        position: { top: "390px", left: "250px" },
+      },
+      {
+        body: "5. Condenser: Gathers and focuses light from the illuminator onto the specimen being viewed.",
+        position: { top: "420px", left: "270px" },
+      },
+      {
+        body: "6. Illumination: The light source for an optical microscope.",
+        position: { top: "480px", left: "270px" },
+        
+      },
+      {
+        body: "7. Coarse adjustment Knob: Brings the specimen into general focus.",
+        position: { top: "270px", left: "210px" },
+      },
+      {
+        body: "8. Fine adjustment Knob: Fine tunes the focus and increases the detail of the specimen.",
+        position: { top: "305px", left: "180px" },
+      },
+      {
+        body: "9. Arm: The arm connects the body tube to the base of the microscope.",
+        position: { top: "350px", left: "130px" },
+      },
+      {
+        body: "10. Base: The base supports the microscope and it’s where illuminator is located.",
+        position: { top: "500px", left: "300px" },
+        
+      }
+      
+    ];
+
+    function performStep(i) {
+      if (i >= steps.length) {
+        return;
+      }
+      step = steps[i];
+      popover.setBody(step.body);
+      popover.setPosition(step.position);
+
+      popover.onNext(() => {
+        popover.destroy();
+        if (step.callback) {
+          if (step.callback(i)) {
+            performStep(i + 1);
+          }
+        } else {
+          performStep(i + 1);
+        }
+      });
+
+      popover.show();
+    }
+
+    performStep(0);
+  </script>
+</body>
+</html>
