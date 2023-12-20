@@ -15,9 +15,10 @@
         crossorigin="anonymous"></script>
 
     <style>
-        *{
+        * {
             font-size: 20px;
         }
+
         .main-scroll-div {
             padding: 8px;
             display: flex;
@@ -102,7 +103,8 @@
             color: red;
             padding: 5px;
         }
-        a{
+
+        a {
             text-decoration: none;
         }
     </style>
@@ -130,9 +132,9 @@
                 <label for="objectivelense" class="form-label">Eyepiece </label>
                 <input type="radio" checked disabled>10X</input>
             </div>
-            
+
             <div class="col-md-4">
-                <span class="objectivelensetip"></span> <br/>
+                <span class="objectivelensetip"></span> <br />
                 <label class="form-label">Please select correct Objective Lens</label>
                 <div>
                     <input type="radio" id="lense10" name="objectiveLense" value="10" class="form-check-input">
@@ -149,7 +151,7 @@
             </div>
 
             <div class="col-md-12">
-                <span class="checkcompatbilitytip"></span><br/>
+                <span class="checkcompatbilitytip"></span><br />
                 <!-- This button only checking lens compatible or not it does not care about image -->
                 <button type="button" id="checkCompatibilityButton" class="btn btn-primary"
                     onclick="checkCompatibility()">Check Lens compatibility
@@ -172,13 +174,13 @@
             </div>
 
             <div class="col-md-12">
-                <span class="submittip"></span><br/>
+                <span class="submittip"></span><br />
                 <button type="button" onclick="completeCompactibilityCheck()" class="btn btn-primary">Submit</button>
             </div>
             <div class="col-md-12">
 
-                <button type="button"  class="btn btn-warning"> <a href="activity2.html">Previous</a></button>
-                <button type="button"  class="btn btn-warning"> <a href="Task2.html">Next </a></button>
+                <button type="button" class="btn btn-warning"> <a href="activity2.html">Previous</a></button>
+                <button type="button" class="btn btn-warning"> <a href="Task2.html">Next </a></button>
             </div>
     </div>
     </form>
@@ -319,18 +321,17 @@
             if (selectedObjective === undefined) {
                 chooseModal.show();
             } else {
-                if (selectedMagnification === 100 && selectedObjective === 10) {
+                if (selectedMagnification === 100 && selectedObjective === 10 || selectedMagnification === 200 && selectedObjective === 20 || selectedMagnification === 500 && selectedObjective === 50) {
                     successModal.show();
+
+                    // Hide the successModal after a delay (e.g., 2 seconds)
+                    setTimeout(function () {
+                        successModal.hide();
+                    }, 2000);
+
                     // renderImages(selectedMagnification);
                     renderImagesAsCarousel(selectedMagnification)
-                } else if (selectedMagnification === 200 && selectedObjective === 20) {
-                    successModal.show();
-                    // renderImages(selectedMagnification);
-                    renderImagesAsCarousel(selectedMagnification)
-                } else if (selectedMagnification === 500 && selectedObjective === 50) {
-                    successModal.show();
-                    // renderImages(selectedMagnification);
-                    renderImagesAsCarousel(selectedMagnification)
+
                 } else {
                     errorModal.show();
                 }
@@ -468,6 +469,10 @@
             const magnificationSelect = document.querySelector('#magnification');
             const objectiveRadios = document.querySelectorAll('input[name="objectiveLense"]');
             const selectedMagnification = parseInt(magnificationSelect.value);
+
+            var chooseModal = new bootstrap.Modal(document.getElementById('chooseModal'));
+            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
+            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
             let selectedObjective;
 
             objectiveRadios.forEach((radio) => {
@@ -476,29 +481,26 @@
                 }
             });
 
-            var chooseModal = new bootstrap.Modal(document.getElementById('chooseModal'));
-            var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-            var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
             if (selectedObjective === undefined) {
                 chooseModal.show();
             } else {
-                var successModal = new bootstrap.Modal(document.getElementById('successModal'));
-                var errorModal = new bootstrap.Modal(document.getElementById('errorModal'));
-                if (selectedMagnification === 100 && selectedObjective === 10) {
+                if ((selectedMagnification === 100 && selectedObjective === 10) ||
+                    (selectedMagnification === 200 && selectedObjective === 20) ||
+                    (selectedMagnification === 500 && selectedObjective === 50)) {
                     successModal.show();
-                    checkingImage();
-                } else if (selectedMagnification === 200 && selectedObjective === 20) {
-                    successModal.show();
-                    checkingImage();
-                } else if (selectedMagnification === 500 && selectedObjective === 50) {
-                    successModal.show();
+
+                    // Hide the successModal after a delay (e.g., 4 seconds)
+                    setTimeout(function () {
+                        successModal.hide();
+                    }, 4000);
+
                     checkingImage();
                 } else {
                     errorModal.show();
                 }
             }
-
         }
+
 
         function checkingImage() {
             let selectedObjective;
@@ -533,6 +535,12 @@
                         if (selectedImageValue == totalMagnification) {
                             // alert(`Selected Image: ${selectedImageValue}\nTotal Magnification: ${totalMagnification}`); // display the selected image and total magnification
                             correctImageModal.show();
+                            // Hide the correctImageModal after a delay (e.g., 2 seconds)
+                            setTimeout(function () {
+                                correctImageModal.hide();
+                                window.location.reload();
+                            }, 2000);
+
                         }
                         else {
                             // alert(`Selected Image: ${selectedImageValue}\nTotal Magnification: ${totalMagnification}`); // display the selected image and total magnification
@@ -583,7 +591,6 @@
             }
         }
         console.log(ImageBundleChooser(100))
-
 
         // Mini instruction 
         let steps = [
