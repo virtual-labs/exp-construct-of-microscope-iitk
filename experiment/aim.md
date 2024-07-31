@@ -1,4 +1,4 @@
-The aim of this experiment is to learn<br><br>
-(1) the construction of optical microscope, <br>
-(2) the role of each component and <br>
-(3) procedure to perform imaging using optical microscope
+The aim of this experiment is to learn<br>
+(1) The construction of optical microscope <br>
+(2) The role of each component <br>
+(3) Procedure to perform imaging using optical microscope
