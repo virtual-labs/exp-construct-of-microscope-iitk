@@ -16,9 +16,10 @@
     <!-- Font -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
-        *{
+        * {
             font-size: 20px;
         }
+
         .main-container {
             width: 100%;
             margin: 0 auto;
@@ -102,11 +103,12 @@
             flex-wrap: wrap;
             gap: 0px;
             padding: 25px;
+            width: 44%;
         }
 
         .image-matrix img {
-            width: 53px;
-            height: 50px;
+            width: 20px;
+            height: 20px;
             object-fit: cover;
         }
 
@@ -121,7 +123,7 @@
 <body>
     <div class="container main-container">
         <form class="row g-1">
-            <div class="col-md-4 ">
+            <div class="col-md-12 ">
                 <!-- magnification using select   -->
                 <span id="magnificationtip"></span>
                 <label for="magnification" class="form-label m-2">Select magnification for images </label>
@@ -131,45 +133,53 @@
                     <option value="200">200X</option>
                     <option value="500">500X</option>
                 </select>
-            </div>
-
-            <div class="row ">
                 <p id="locationText"><span id="locationTexttip"></span><br />
                     Your image selection will be shown here ..
                 </p>
-                <div class="col-md-6 d-flex justify-content-center align-items-center">
-                  
-                    <div id="imageContainer"></div>
+            </div>
 
+            <div class="row ">
+
+                <div class="col-md-6 d-flex justify-content-center align-items-center">
+                    <div id="imageContainer"></div>
                 </div>
 
                 <div class="col-md-6">
-                    
-                    <!-- Image matrix -->
-                    <div id="locationText">
-                        <span id="imageMaptip"></span>
-                        <p>Image Navigation Map </p>
-                        <div id="imageMatrix" class="image-matrix"></div>
-                    </div>
-
-                </div>
-                <div class="col-md-4">
-                    <!-- Navigation button -->
-                    <div class="navigation-buttons">
-                        <span class="navigation-buttonstip "></span>
-                        <p>Use buttons to navigate images </p>
-                        <div id="joystickContainer">
-                            <button id="navUp" class="navigation-button"><i class="fa fa-arrow-up "> </i></button>
-                            <div>
-                                <button id="navLeft" class="navigation-button mx-3"><i class="fa fa-arrow-left ">
-                                    </i></button>
-                                <button id="navRight" class="navigation-button mx-3"><i class="fa fa-arrow-right ">
-                                    </i></button>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <!-- Image matrix -->
+                            <div id="locationText">
+                                <span id="imageMaptip"></span>
+                                <p>Image Navigation Map </p>
+                                <div id="imageMatrix" class="image-matrix"></div>
                             </div>
-                            <button id="navDown" class="navigation-button"><i class="fa fa-arrow-down "> </i></button>
+                        </div>
+                        <div class="col-md-12">
+                            <!-- Navigation button -->
+                            <div class="navigation-buttons">
+                                <span class="navigation-buttonstip "></span>
+                                <p>Use buttons to navigate images </p>
+                                <div id="joystickContainer">
+                                    <button id="navUp" class="navigation-button"><i class="fa fa-arrow-up ">
+                                        </i></button>
+                                    <div>
+                                        <button id="navLeft" class="navigation-button mx-3"><i
+                                                class="fa fa-arrow-left ">
+                                            </i></button>
+                                        <button id="navRight" class="navigation-button mx-3"><i
+                                                class="fa fa-arrow-right ">
+                                            </i></button>
+                                    </div>
+                                    <button id="navDown" class="navigation-button"><i class="fa fa-arrow-down ">
+                                        </i></button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
+
+                
+            </div>
 
 
         </form>

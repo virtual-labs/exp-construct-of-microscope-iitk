@@ -157,7 +157,7 @@
                     onclick="checkCompatibility()">Check Lens compatibility
                 </button>
             </div>
-            <label for="cover"> Please choose correct focus and click on image to select : </label>
+            <label for="cover"> Please choose correct focus image: </label>
             <div id="cover">
                 <span class="imagetip"></span>
                 <div id="image-container">
@@ -209,11 +209,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title" id="exampleModalLabel"> SUCCESS : Lens Compatiable </h4>
+                    <h4 class="modal-title" id="exampleModalLabel"> SUCCESS : Lens compatible </h4>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>The selected magnification and objective lens are compatiable.</p>
+                    <p>The selected magnification and objective lens are compatible.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-primary" data-bs-dismiss="modal"> OK </button>
@@ -226,11 +226,11 @@
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel"> ERROR : Lens compatiability </h5>
+                    <h5 class="modal-title" id="exampleModalLabel"> ERROR : Lens compatible </h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <p>The selected magnification and objective lens are not compatiable.</p>
+                    <p>The selected magnification and objective lens are not compatible.</p>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" onclick="location.reload()">OK</button>
@@ -418,7 +418,7 @@
                 console.log(currentImageIndex)
 
                 if (currentImageIndex < imageUrls[imageSelector].length - 1) {
-                    imageInput.checked = false
+                    imageInput.checked = true
                     currentImageIndex++;
                     imageInput.setAttribute('id', 'image' + currentImageIndex)
                     imageInputLabel.setAttribute('for', 'image' + currentImageIndex)
@@ -435,7 +435,7 @@
                 event.preventDefault()
 
                 if (currentImageIndex > 0) {
-                    imageInput.checked = false
+                    imageInput.checked = true
                     currentImageIndex--;
                     imageInput.setAttribute('id', 'image' + currentImageIndex)
                     imageInputLabel.setAttribute('for', 'image' + currentImageIndex)
@@ -487,14 +487,15 @@
                 if ((selectedMagnification === 100 && selectedObjective === 10) ||
                     (selectedMagnification === 200 && selectedObjective === 20) ||
                     (selectedMagnification === 500 && selectedObjective === 50)) {
-                    successModal.show();
+                        checkingImage();   // checking direct image without showing lens sompatiblity
+                   //below line will show lense compablity popup
+                    // successModal.show();
+                    // // Hide the successModal after a delay (e.g., 4 seconds)
+                    // setTimeout(function () {
+                    //     successModal.hide();
+                    // }, 4000);
 
-                    // Hide the successModal after a delay (e.g., 4 seconds)
-                    setTimeout(function () {
-                        successModal.hide();
-                    }, 4000);
-
-                    checkingImage();
+                    // checkingImage();
                 } else {
                     errorModal.show();
                 }
@@ -607,7 +608,7 @@
                 selector: ".checkcompatbilitytip",
             },
             {
-                body: "Step 4: Choose the correct image by clicking on the image after adjusting the focus using the Focus - and Focus + buttons.",
+                body: "Step 4: Choose the correct image by using the Focus - and Focus + buttons.",
                 selector: ".imagetip",
             },
             {
