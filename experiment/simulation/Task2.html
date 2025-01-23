@@ -38,7 +38,7 @@
         }
 
         .navigation-buttons {
-            margin-top: 20px;
+            margin-top: 10px;
         }
 
 
@@ -103,18 +103,24 @@
             flex-wrap: wrap;
             gap: 0px;
             padding: 25px;
-            width: 44%;
+            width: 22%;
         }
 
         .image-matrix img {
-            width: 20px;
-            height: 20px;
+            width: 8px;
+            height: 8px;
             object-fit: cover;
         }
 
         .image-matrix .selected {
             border: 3px solid red;
 
+        }
+
+        /* Disable hover and click on #imageMatrix */
+        #imageMatrix:active,
+        #imageMatrix:hover {
+            pointer-events: none;
         }
     </style>
 
@@ -178,7 +184,7 @@
                     </div>
                 </div>
 
-                
+
             </div>
 
 
