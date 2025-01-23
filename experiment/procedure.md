@@ -10,4 +10,3 @@
 10.	<b>Microscopic examination</b>- Place the prepared specimen on the microscope stage. For a thorough examination of the microstructure, use the proper magnification and lighting. Take pictures or draw sketches for your documentation.<br>
 11.	<b>Analysis and reporting</b>- Conduct any required measurements or analyses in accordance with the study's goals. Note down all the results, including phases, microstructural characteristics, and any anomalies.<br>
 12.	<b>Preservation (optional)</b>- If the specimen needs to be preserved for an extended period, applying a protective layer (like lacquer) can be preferred to stop oxidation.
-
