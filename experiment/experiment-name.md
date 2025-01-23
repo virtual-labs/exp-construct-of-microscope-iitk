@@ -1,1 +1,1 @@
-## Construct of Microscope and its components
+## Construct of Microscope and its Components
