@@ -19,6 +19,14 @@
             font-size: 20px;
         }
 
+        .text {
+            background-color: yellow;
+            border-radius: 21px;
+            font-size: 22px;
+            margin-top: 10px;
+            padding: 5px;
+        }
+
         .main-scroll-div {
             padding: 8px;
             display: flex;
@@ -113,6 +121,10 @@
 
 <body>
     <div class="container ">
+        <p class="d-flex justify-content-center align-items-center text">In the experiment, the user should start by
+            selecting the desired magnification and then choose the appropriate objective lens. Next, use the focus tabs
+            to fine-tune the image. Once the image is properly focused, click on the image, and then submit it by
+            clicking the submit tab. </p>
         <form class="row g-3">
             <div class="col-md-4">
 
@@ -487,8 +499,8 @@
                 if ((selectedMagnification === 100 && selectedObjective === 10) ||
                     (selectedMagnification === 200 && selectedObjective === 20) ||
                     (selectedMagnification === 500 && selectedObjective === 50)) {
-                        checkingImage();   // checking direct image without showing lens sompatiblity
-                   //below line will show lense compablity popup
+                    checkingImage();   // checking direct image without showing lens sompatiblity
+                    //below line will show lense compablity popup
                     // successModal.show();
                     // // Hide the successModal after a delay (e.g., 4 seconds)
                     // setTimeout(function () {
