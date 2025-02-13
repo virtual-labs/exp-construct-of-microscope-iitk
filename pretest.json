@@ -1,0 +1,71 @@
+{
+  "version": 2.0,
+  "questions": [
+    {
+      "question": "1. If the magnification of objective lens and the eyepiece are 30x and 10x, the magnification that can be achieved is:",
+      "answers": {
+        "a": "30x",
+        "b": "10x",
+        "c": "3x",
+        "d": "300x"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "2. The role of condenser lens is:",
+      "answers": {
+        "a": "to protect the sample from the illumination source",
+        "b": "to form a magnifying image of the specimen",
+        "c": "to focus the light rays onto the specimen",
+        "d": "to improve the resolution of the image"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "3. Which objective lens will have high magnifying power",
+      "answers": {
+        "a": "lens with a short focal length but kept in air",
+        "b": "lens with a large focal length but immersed in oil",
+        "c": "lens with a large focal length but kept in air",
+        "d": "lens with a short focal length but immersed in oil"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "4. If a monochromatic light of λ=400 nm used in optical microscope having objective lens with NA of 0.8, then what would be the maximum resolution that can be achieved.",
+      "answers": {
+        "a": "250 nm",
+        "b": "200 nm",
+        "c": "25 nm",
+        "d": "500 nm"
+      },
+      "correctAnswer": "a",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "5. State which of the statement is true",
+      "answers": {
+        "a": "The length of the eyepiece tube is fixed",
+        "b": "Microscopes are equipped with only one objective lens of a fixed magnifying power",
+        "c": "Numerical aperture reduces with the increase in the focal length of the objective lens",
+        "d": "Diaphragm controls the amount of light strike the specimen"
+      },
+      "correctAnswer": "d",
+      "difficulty": "beginner"
+    },
+    {
+      "question": "6. Which one of the following is not the part of the optical microscope?",
+      "answers": {
+        "a": "Objective lens",
+        "b": "Eyepiece lens",
+        "c": "Electron gun",
+        "d": "Condenser lens"
+      },
+      "correctAnswer": "c",
+      "difficulty": "beginner"
+    }
+  ]
+}

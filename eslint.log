@@ -1,0 +1,16 @@
+
+/home/runner/work/exp-construct-of-microscope-iitk/exp-construct-of-microscope-iitk/experiment/simulation/javascript/dnd.js
+  51:7  warning  'dataList' is assigned a value but never used  no-unused-vars
+  53:9  warning  'item' is assigned a value but never used      no-unused-vars
+
+/home/runner/work/exp-construct-of-microscope-iitk/exp-construct-of-microscope-iitk/experiment/simulation/javascript/new.js
+   1:10  warning  'onDragStart' is defined but never used  no-unused-vars
+  11:12  warning  'onDragOver' is defined but never used   no-unused-vars
+  14:12  warning  'onDrop' is defined but never used       no-unused-vars
+  15:11  warning  'id' is assigned a value but never used  no-unused-vars
+
+/home/runner/work/exp-construct-of-microscope-iitk/exp-construct-of-microscope-iitk/experiment/simulation/javascript/popover.js
+  39:7  warning  'Popover' is defined but never used  no-unused-vars
+
+✖ 7 problems (0 errors, 7 warnings)
+
