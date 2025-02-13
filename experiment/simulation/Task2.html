@@ -20,6 +20,14 @@
             font-size: 20px;
         }
 
+        .text {
+            background-color: yellow;
+            border-radius: 21px;
+            font-size: 22px;
+            margin-top: 10px;
+            padding: 5px;
+        }
+
         .main-container {
             width: 100%;
             margin: 0 auto;
@@ -128,6 +136,11 @@
 
 <body>
     <div class="container main-container">
+        <p class="d-flex justify-content-center align-items-center text">
+            You have been provided with a welded iron sample containing 0.25 wt.% C. The microstructure of the welded
+            region can be examined at 100X, 200X, and 500X magnification. Analyze the microstructure and answer the
+            multiple-choice questions accordingly.
+        </p>
         <form class="row g-1">
             <div class="col-md-12 ">
                 <!-- magnification using select   -->
@@ -189,6 +202,60 @@
 
 
         </form>
+        <div class="col-md-12 mt-4">
+           
+            <form id="quizForm">
+                <div class="mb-3">
+                    <label>1. What microstructural feature is observed at coordinate (7,3) under 100x
+                        magnification?</label><br>
+                    <input type="radio" name="q1" value="a"> Columnar morphology<br>
+                    <input type="radio" name="q1" value="b"> Coarse grain structure<br>
+                    <input type="radio" name="q1" value="c"> Fine grain structure<br>
+                      <span id="q1-feedback"></span>
+                </div>
+                <div class="mb-3">
+                    <label>2. The morphology observed at coordinate (7,10) under 100x magnification corresponds to which
+                        zone?</label><br>
+                    <input type="radio" name="q2" value="a"> Heat-affected zone<br>
+                    <input type="radio" name="q2" value="b"> Weld zone<br>
+                    <input type="radio" name="q2" value="c"> Base metal<br>
+                      <span id="q2-feedback"></span>
+                </div>
+                <div class="mb-3">
+                    <label>3. What type of microstructure is obtained at coordinate (5,9) at 500x
+                        magnification?</label><br>
+                    <input type="radio" name="q3" value="a"> Columnar morphology<br>
+                    <input type="radio" name="q3" value="b"> Coarser grain<br>
+                    <input type="radio" name="q3" value="c"> Finer grain<br>
+                    <input type="radio" name="q3" value="d"> None of these<br>
+                      <span id="q3-feedback"></span>
+                </div>
+                <div class="mb-3">
+                    <label>4. Based on the microstructural image, columnar grains are found in which region?</label><br>
+                    <input type="radio" name="q4" value="a"> Heat-affected zone<br>
+                    <input type="radio" name="q4" value="b"> Weld zone<br>
+                    <input type="radio" name="q4" value="c"> Base metal<br>
+                      <span id="q4-feedback"></span>
+                </div>
+                <div class="mb-3">
+                    <label>5. Identify the coordinate at 200× magnification where the heat-affected zone is
+                        located.</label><br>
+                    <input type="radio" name="q5" value="a"> (3,1)<br>
+                    <input type="radio" name="q5" value="b"> (4,10)<br>
+                    <input type="radio" name="q5" value="c"> (1,5)<br>
+                      <span id="q5-feedback"></span>
+                </div>
+                <div class="mb-3">
+                    <label>6. Identify the coordinate at 500× magnification where the weld zone is located.</label><br>
+                    <input type="radio" name="q6" value="a"> (7,1)<br>
+                    <input type="radio" name="q6" value="b"> (4,8)<br>
+                    <input type="radio" name="q6" value="c"> (7,10)<br>
+                      <span id="q6-feedback"></span>
+                </div>
+                <button type="button" class="btn btn-primary" onclick="submitQuiz()">Submit Answers</button>
+            </form>
+            <p id="quizResult" class="mt-3"></p>
+        </div>
         <div class="col-md-12">
 
             <button type="button" class="btn btn-warning m-2"> <a href="Task1.html">Previous</a></button>
@@ -439,6 +506,46 @@
             updateImageMatrix();
         });
 
+
+
+
+
+
+        //  Quiz code
+        function submitQuiz() {
+        const answers = {
+            q1: "a",
+            q2: "b",
+            q3: "c",
+            q4: "b",
+            q5: "b",
+            q6: "c"
+        };
+        
+        let score = 0;
+        let totalQuestions = Object.keys(answers).length;
+        
+        for (let key in answers) {
+            let selected = document.querySelector(`input[name="${key}"]:checked`);
+            let feedbackElement = document.getElementById(`${key}-feedback`);
+            
+            if (selected) {
+                if (selected.value === answers[key]) {
+                    score++;
+                    feedbackElement.innerText = "✔ Correct";
+                    feedbackElement.style.color = "green";
+                } else {
+                    feedbackElement.innerText = "✘ Incorrect.";
+                    feedbackElement.style.color = "red";
+                }
+            } else {
+                feedbackElement.innerText = "✘ No answer selected." ;
+                feedbackElement.style.color = "red";
+            }
+        }
+        
+        document.getElementById("quizResult").innerText = `Your score: ${score} out of ${totalQuestions}`;
+    }
     </script>
 
 </body>
