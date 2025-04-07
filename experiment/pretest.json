@@ -35,11 +35,11 @@
       "difficulty": "beginner"
     },
     {
-      "question": "4. If a monochromatic light of λ=400 nm used in optical microscope having objective lens with NA of 0.8, then what would be the maximum resolution that can be achieved.",
+      "question": "4. If a monochromatic light of λ=400 nm used in optical microscope having objective lens with NA of 0.813, then what would be the maximum resolution that can be achieved.",
       "answers": {
         "a": "250 nm",
         "b": "200 nm",
-        "c": "25 nm",
+        "c": "300 nm",
         "d": "500 nm"
       },
       "correctAnswer": "a",
